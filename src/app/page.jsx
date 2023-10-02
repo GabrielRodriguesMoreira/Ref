@@ -11,19 +11,19 @@ export default function Home() {
       </section>
       <section className='flex flex-col w-full items-center space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2  lg:gap-2'>
         <div className='bg-white p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm'>
-          <img className='rounded-sm ' src="https://pbs.twimg.com/media/FNzfe8XWUAEu3qh?format=jpg&name=large" alt="" />
+          <img className='rounded-sm ' src="https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg" alt="" />
           <p>10 anos de experiência!</p>
         </div>
         <div className='bg-white p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm '>
-          <img className='rounded-sm' src="https://pbs.twimg.com/media/FNzfe8XWUAEu3qh?format=jpg&name=large" alt="" />
+          <img className='rounded-sm' src="https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg" alt="" />
           <p>10 anos de experiência!</p>
         </div>
         <div className='bg-white p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm '>
-          <img className='rounded-sm' src="https://pbs.twimg.com/media/FNzfe8XWUAEu3qh?format=jpg&name=large" alt="" />
+          <img className='rounded-sm' src="https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg" alt="" />
           <p>10 anos de experiência!</p>
         </div>
         <div className='bg-white p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm '>
-          <img className='rounded-sm' src="https://pbs.twimg.com/media/FNzfe8XWUAEu3qh?format=jpg&name=large" alt="" />
+          <img className='rounded-sm' src="https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg" alt="" />
           <p>10 anos de experiência!</p>
         </div>
         
