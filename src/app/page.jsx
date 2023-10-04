@@ -68,7 +68,7 @@ const swapmodal = () =>{
       </section>
 
       {fullscreenImage && (
-        <div onClick={closeFullscreenImage} className="fixed top-0 -left-2 w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50">
+        <div onClick={closeFullscreenImage} className="fixed top-0 left-0 lg:-left-2 w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50">
           <img
             src={fullscreenImage}
             alt="Fullscreen"
@@ -78,14 +78,15 @@ const swapmodal = () =>{
       )}
 
       {modal && (
-        <modal className="fixed top-0 -left-2 w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50">
-          <div className='bg-slate-100 w-80 h-72 p-20 space-x-10 rounded-sm flex justify-center items-center'>
-            <button onClick={handleCallButtonClick} className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-full w-48'>
+        <modal className="fixed top-0 left-0 lg:-left-2  w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50">
+          <div className='bg-slate-100 w-1/2 h-1/2 p-20 space-x-10 rounded-sm flex justify-center items-center relative'>
+            <button onClick={handleCallButtonClick} className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-1/4'>
               Nos Ligue
             </button>
-            <button className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md'>
+            <button  className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-1/4 flex items-center justify-center'>
               <a href="https://wa.me/5585987373084">Falar pelo <br></br> Whatsapp</a>
             </button>
+            <button className='absolute right-5 top-5 bg-pink-600 w-8 h-8 text-white rounded-md' onClick={swapmodal}>X</button>
           </div>
         </modal>
       )}
