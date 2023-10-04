@@ -29,13 +29,13 @@ const swapmodal = () =>{
         <img className='lg:w-full' src="title.png" alt="" />
         <img src="/gifimage.gif" alt="" />
         <p className="font-kalam text-pink-700 text-xl lg:text-2xl">&quot;Ensinando com <br></br> <span className='ml-14'>responsabilidade!</span>&quot;</p>
-        <button className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl lg:hidden">
+        <button onClick={swapmodal} className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl lg:hidden">
           <p>Garanta sua Vaga!</p> <span className='bg-white text-4xl text-pink-700 rounded-full'><MdKeyboardArrowRight /></span>
         </button>
       </section>
       <section className='flex flex-col w-full items-center space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2'>
         <div
-          className='bg-white p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm cursor-pointer '
+          className='bg-white border-1 border-black p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm cursor-pointer '
           onClick={() => openFullscreenImage("https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg")}
         >
           <img className='rounded-sm max-h-52 object-cover' src="https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg" alt="" />
@@ -62,7 +62,7 @@ const swapmodal = () =>{
           <img className='rounded-sm max-h-52 object-cover' src="https://horario.com.br/wp-content/uploads/2022/03/geha-blog-mar%C3%A7o-09-03.jpg" alt="" />
           <p>10 anos de experiência!</p>
         </div>
-        <button onClick={swapmodal} className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl col-span-2">
+        <button onClick={swapmodal} className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl col-span-2 mb-10 lg:mb-0">
           <p>Garanta sua Vaga!</p> <span className='bg-white text-4xl text-pink-700 rounded-full'><MdKeyboardArrowRight /></span>
         </button>
       </section>
@@ -78,15 +78,15 @@ const swapmodal = () =>{
       )}
 
       {modal && (
-        <modal className="fixed top-0 left-0 lg:-left-2  w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50">
-          <div className='bg-slate-100 w-1/2 h-1/2 p-20 space-x-10 rounded-sm flex justify-center items-center relative'>
-            <button onClick={handleCallButtonClick} className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-1/4'>
+        <modal className="fixed top-0 left-0 lg:-left-2  w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50 px-6">
+          <div className='bg-slate-100 w-full lg:w-1/2 h-1/2 p-20 space-y-10 lg:space-y-0 lg:space-x-10 rounded-sm flex flex-col lg:flex-row justify-center items-center relative'>
+            <button onClick={handleCallButtonClick} className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-full lg:w-1/4 flex items-center justify-cente'>
               Nos Ligue
             </button>
-            <button  className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-1/4 flex items-center justify-center'>
+            <button  className='bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-full lg:w-1/4 flex items-center justify-center'>
               <a href="https://wa.me/5585987373084">Falar pelo <br></br> Whatsapp</a>
             </button>
-            <button className='absolute right-5 top-5 bg-pink-600 w-8 h-8 text-white rounded-md' onClick={swapmodal}>X</button>
+            <button className='absolute right-3 top-3 bg-pink-600 w-8 h-8 text-white rounded-md' onClick={swapmodal}>X</button>
           </div>
         </modal>
       )}
