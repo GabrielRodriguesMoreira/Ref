@@ -25,7 +25,7 @@ export default function Home() {
 
 
   return (
-    <main className="flex flex-col p-4 pb-0 lg:flex-row lg:space-x-2">
+    <main className="flex flex-col p-4 pb-10 lg:pb-0 lg:flex-row lg:space-x-2">
 
       <section className="flex w-full flex-col items-center space-y-3 mb-10 lg:w-3/5 lg:mb-0">
         <Image src="/title.png" alt="benga" width={500} height={500} />
@@ -56,7 +56,7 @@ export default function Home() {
             </m.div>
           ))}
         </>
-        <button onClick={swapModal} className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl col-span-2 mb-10 lg:mb-0">
+        <button onClick={swapModal} className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl col-span-2  lg:mb-0">
           <p>Garanta sua Vaga!</p> <span className="bg-white text-4xl text-pink-700 rounded-full"><MdKeyboardArrowRight /></span>
         </button>
       </section>
