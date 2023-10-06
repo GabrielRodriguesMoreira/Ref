@@ -1,6 +1,15 @@
-import { motion as m,  } from 'framer-motion'
+import { motion as m } from 'framer-motion'
+import { BsWhatsapp } from 'react-icons/bs';
+import { BsFillTelephoneFill } from 'react-icons/bs';
+import { motion } from 'framer-motion'
+export default function Modal() {
 
-export default function Modal(handleCallButtonClick, swapModal) {
+    const phoneNumber = '85988621426';
+
+    const handleCallButtonClick = () => {
+        window.location.href = `tel:${phoneNumber}`;
+    };
+
 
     const dropIn = {
         hidden: {
@@ -10,7 +19,7 @@ export default function Modal(handleCallButtonClick, swapModal) {
         visible: {
             y: "0",
             opacity: 1,
-            transition: { duration: 0.3, type:'spring', damping: 15, },
+            transition: { duration: 0.3, type: 'spring', damping: 15, },
         },
         exit: {
             y: "-100vh",
@@ -20,19 +29,26 @@ export default function Modal(handleCallButtonClick, swapModal) {
 
     return (
         <m.div
-            className="bg-slate-100 w-full lg:w-1/2 h-1/2 p-20 space-y-10 lg:space-y-0 lg:space-x-10 rounded-sm flex flex-col lg:flex-row justify-center items-center relative"
+            className="bg-gradient-to-r from-purple-300 via-slate-100 to-green-300 w-full lg:w-3/4 h-1/2 p-20 space-y-10 lg:space-y-0 lg:space-x-10 rounded-sm flex flex-col lg:flex-row justify-center items-center relative"
             initial="hidden"
             animate="visible"
             exit="exit"
             variants={dropIn}
             onClick={(e) => { e.stopPropagation() }}
         >
-            <button onClick={handleCallButtonClick} className="bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-full lg:w-1/4 flex items-center justify-center">
-                Nos Ligue
-            </button>
-            <button className="bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-full lg:w-1/4 flex items-center justify-center">
-                <a href="https://wa.me/5585987373084">Falar pelo <br></br> Whatsapp</a>
-            </button>
+            <motion.button
+                onClick={handleCallButtonClick}
+                className="bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-full lg:w-1/4 flex items-center justify-center space-x-3"
+                whileHover={{ scale: 1.15 }}
+            >
+                <BsFillTelephoneFill className='text-2xl' /> <span>Ligar</span>
+            </motion.button>
+            <motion.button
+                className="bg-pink-600 text-white p-6 rounded-sm font-inter text-md shadow-md h-1/2 w-full lg:w-1/4 flex items-center justify-center space-x-3"
+                whileHover={{ scale: 1.15 }}
+            >
+                <BsWhatsapp className='text-2xl' />  <a href="https://wa.me/5585988621426">Falar pelo <br></br> Whatsapp</a>
+            </motion.button>
         </m.div>
     )
 }
