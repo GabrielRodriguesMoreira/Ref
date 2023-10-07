@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Reforço Escolar Tia Glau',
-  description: 'Matricule seu filho e garanta uma educação de qualidade',
+  description: 'Matricule seu filho e garanta uma educação de qualidade!',
 }
 
 export default function RootLayout({ children }) {
