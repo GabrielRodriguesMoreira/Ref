@@ -72,7 +72,7 @@ export default function Song() {
         >
             <m.main
                 id="song-container"
-                className='absolute w-72 h-20 lg:w-80 lg:h-16 bottom-6 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden'
+                className='absolute w-72 h-20 lg:w-80 lg:h-16 bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden'
                 drag = {canDrag}
                 dragConstraints={constraintsRef}
             >
@@ -92,6 +92,8 @@ export default function Song() {
                         onChange={handleVolumeChange}
                         onMouseDown={()=>{setCanDrag(false)}}
                         onMouseUp={()=>{setCanDrag(true)}}
+                        onTouchStart={()=>{setCanDrag(false)}}
+                        onTouchEnd={()=>{setCanDrag(true)}}
                     />
                 </div>
                 {songid && (
