@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion as m } from 'framer-motion'
 import YouTube from 'react-youtube';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
@@ -12,8 +12,12 @@ export default function Song() {
     const [isVideoPlaying, setVideoPlaying] = useState(true);
     const playlist = ["8K875HrgVVQ", "lF2zPyyKkPA", "DhHGDOgjie4", "CarFx8c2c3c"]
     var playlistIndex = 0
-    const [songid, setsongid] = useState(playlist[playlistIndex]);
+    const [songid, setsongid] = useState(null);
     const [volume, setVolume] = useState(20);
+
+    useEffect(()=>{
+        setsongid(playlist[playlistIndex])
+    },[])
 
     const onPlayerReady = (event) => {
         youtubePlayerRef.current = event.target;
@@ -23,8 +27,9 @@ export default function Song() {
     const handleSwapSong = (mov) => {
         if (playlistIndex + mov >= 0 && playlistIndex + mov <= 3) {
             playlistIndex = playlistIndex + mov
+            setsongid(playlist[playlistIndex])
         }
-        setsongid(playlist[playlistIndex])
+ 
     }
 
     const handleVideoPlayPause = () => {
