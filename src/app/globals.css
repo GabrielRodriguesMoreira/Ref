@@ -12,3 +12,13 @@ body *{
   box-sizing: border-box;
   
 }
+.youtube_iframe {
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 16/9;
+  object-fit: scale-down;
+  position: absolute;
+  border-radius: 0.3rem;
+  transform: translate(-50%, -50%);
+}

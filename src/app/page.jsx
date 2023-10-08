@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { motion as m, AnimatePresence } from 'framer-motion';
 import Modal from './components/modal/modal';
+import Song from './components/song/Song';
 
 export default function Home() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
@@ -71,11 +72,12 @@ export default function Home() {
       <section className='w-full mt-10 flex justify-center'>
         <div className=' bg-pink-500 w-full lg:w-4/5 space-y-3 p-3 rounded-sm shadow-md flex flex-col justify-center text-center items-center'>
           <h1 className='text-white font-inter text-3xl font-black'>Onde nos Encontrar</h1>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15925.29004025453!2d-38.57953025!3d-3.7397327500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74b3e63c0b099%3A0xfa95d644e67a3b3c!2sRefor%C3%A7o%20Escolar%20Tia%20Glau!5e0!3m2!1spt-PT!2sbr!4v1696631701014!5m2!1spt-PT!2sbr" className='w-full h-96' allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15925.29004025453!2d-38.57953025!3d-3.7397327500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74b3e63c0b099%3A0xfa95d644e67a3b3c!2sRefor%C3%A7o%20Escolar%20Tia%20Glau!5e0!3m2!1spt-PT!2sbr!4v1696631701014!5m2!1spt-PT!2sbr" className='w-full h-96' allowFullScreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           <p className='text-white font-inter text-md font-black'>Rua Emilia Freitas 140 - Padre Andrade - Fortaleza/CE</p>
         </div>
       </section>
 
+              <Song />
 
       <AnimatePresence>
         {fullscreenImage && (
@@ -107,6 +109,8 @@ export default function Home() {
           </m.div>
         )}
       </AnimatePresence >
+
+
     </main >
   );
 }
