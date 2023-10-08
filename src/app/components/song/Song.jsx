@@ -72,7 +72,7 @@ export default function Song() {
         >
             <m.main
                 id="song-container"
-                className='absolute w-72 h-20 lg:w-80 lg:h-16 bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden'
+                className='absolute w-72 h-20 bottom-24 lg:w-80 lg:h-16 lg:bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
                 drag = {canDrag}
                 dragConstraints={constraintsRef}
             >
@@ -84,7 +84,7 @@ export default function Song() {
                     <button onClick={() => handleSwapSong(1)}><MdKeyboardDoubleArrowRight /></button>
 
                     <input
-                        className='w-12 lg:w-28 cursor-pointer'
+                        className='w-16 lg:w-28 cursor-pointer'
                         type="range"
                         min="0"
                         max="100"
