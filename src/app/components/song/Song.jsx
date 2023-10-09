@@ -15,7 +15,8 @@ export default function Song() {
     const [songid, setsongid] = useState(null);
     const [volume, setVolume] = useState(20);
     const constraintsRef = useRef(null);
-    const [canDrag, setCanDrag] = useState(true)
+    const [isRangeDragging, setIsRangeDragging] = useState(false);
+
 
     useEffect(() => {
         setsongid(playlist[playlistIndex]);
@@ -54,7 +55,6 @@ export default function Song() {
         }
     };
 
-
     const handleCloseButtonClick = () => {
         const songContainer = document.getElementById('song-container');
         if (songContainer) {
@@ -72,7 +72,7 @@ export default function Song() {
             <m.main
                 id="song-container"
                 className='absolute w-72 h-20  bottom-24 lg:w-80 lg:h-16 lg:bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
-                drag={canDrag}
+                drag={!isRangeDragging}
                 dragConstraints={constraintsRef}
             >
                 <div className='controls text-xl lg:text-2xl text-white flex items-center space-x-1'>
@@ -89,10 +89,9 @@ export default function Song() {
                         max="100"
                         value={volume}
                         onChange={handleVolumeChange}
-                        onMouseDown={() => { setCanDrag(false) }}
-                        onMouseUp={() => { setCanDrag(true) }}
-                        onTouchStart={() => { setCanDrag(false) }}
-                        onTouchEnd={() => { setCanDrag(true) }}
+                        onPointerDown={() => setIsRangeDragging(true)}
+                        onPointerUp={() => setIsRangeDragging(false)}
+                        style={{ pointerEvents: isRangeDragging ? 'none' : 'auto' }}
                     />
                 </div>
                 {songid && (
