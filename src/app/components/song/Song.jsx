@@ -9,7 +9,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 export default function Song() {
     const youtubePlayerRef = useRef(null);
     const [isPlayerReady, setIsPlayerReady] = useState(false);
-    const [isVideoPlaying, setVideoPlaying] = useState(true);
+    const [isVideoPlaying, setVideoPlaying] = useState(false);
     const playlist = ["8K875HrgVVQ", "lF2zPyyKkPA", "DhHGDOgjie4", "CarFx8c2c3c"]
     const [playlistIndex, setPlaylistIndex] = useState(0)
     const [songid, setsongid] = useState(null);
@@ -63,17 +63,16 @@ export default function Song() {
     };
 
     return (
-        <m.div
-            ref={constraintsRef}
-            className='fixed h-screen w-screen'
-            initial={{ x: '-100vw' }}
-            transition={{ duration: 0.8 }}
-            animate={{ x: '0' }}
-        >
+        <>
+            <m.div
+                ref={constraintsRef}
+                className='fixed h-screen w-screen -z-10 top-0 left-0'
+            >
+            </m.div>
             <m.main
                 id="song-container"
-                className='absolute w-72 h-20 bottom-24 lg:w-80 lg:h-16 lg:bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
-                drag = {canDrag}
+                className='absolute w-72 h-20  bottom-24 lg:w-80 lg:h-16 lg:bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
+                drag={canDrag}
                 dragConstraints={constraintsRef}
             >
                 <div className='controls text-xl lg:text-2xl text-white flex items-center space-x-1'>
@@ -90,14 +89,15 @@ export default function Song() {
                         max="100"
                         value={volume}
                         onChange={handleVolumeChange}
-                        onMouseDown={()=>{setCanDrag(false)}}
-                        onMouseUp={()=>{setCanDrag(true)}}
-                        onTouchStart={()=>{setCanDrag(false)}}
-                        onTouchEnd={()=>{setCanDrag(true)}}
+                        onMouseDown={() => { setCanDrag(false) }}
+                        onMouseUp={() => { setCanDrag(true) }}
+                        onTouchStart={() => { setCanDrag(false) }}
+                        onTouchEnd={() => { setCanDrag(true) }}
                     />
                 </div>
                 {songid && (
-                    <div className=' relative h-full aspect-square rounded-md overflow-hidden border-slate-950 border-2'>
+                    <div className='relative h-full aspect-square rounded-md overflow-hidden border-slate-950 border-2'>
+                        <div className='absolute w-full h-full  z-10'></div>
                         <YouTube
                             iframeClassName='youtube_iframe'
                             videoId={songid}
@@ -122,6 +122,7 @@ export default function Song() {
                 )}
                 <AiFillCloseCircle className='text-white text-xl cursor-pointer' onClick={handleCloseButtonClick} />
             </m.main>
-        </m.div>
+
+        </>
     );
 }
