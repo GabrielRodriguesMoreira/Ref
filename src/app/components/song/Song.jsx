@@ -10,7 +10,7 @@ export default function Song() {
     const youtubePlayerRef = useRef(null);
     const [isPlayerReady, setIsPlayerReady] = useState(false);
     const [isVideoPlaying, setVideoPlaying] = useState(false);
-    const playlist = ["8K875HrgVVQ", "lF2zPyyKkPA", "DhHGDOgjie4", "CarFx8c2c3c"]
+    const playlist = ["CarFx8c2c3c", "lF2zPyyKkPA", "DhHGDOgjie4", "8K875HrgVVQ"]
     const [playlistIndex, setPlaylistIndex] = useState(0)
     const [songid, setsongid] = useState(null);
     const [volume, setVolume] = useState(20);
@@ -71,7 +71,7 @@ export default function Song() {
             </m.div>
             <m.main
                 id="song-container"
-                className='absolute w-72 h-20  bottom-24 lg:w-80 lg:h-16 lg:bottom-12 left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
+                className='fixed w-72 h-20  bottom-24 lg:bottom-3  lg:w-80 lg:h-16  left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
                 drag={!isRangeDragging}
                 dragConstraints={constraintsRef}
             >
@@ -91,7 +91,8 @@ export default function Song() {
                         onChange={handleVolumeChange}
                         onPointerDown={() => setIsRangeDragging(true)}
                         onPointerUp={() => setIsRangeDragging(false)}
-                        style={{ pointerEvents: isRangeDragging ? 'none' : 'auto' }}
+                        onTouchStart={() => setIsRangeDragging(true)}
+                        onTouchEnd={() => setIsRangeDragging(false)}
                     />
                 </div>
                 {songid && (
