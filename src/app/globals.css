@@ -25,3 +25,21 @@ body * {
   position: absolute;
   transform: translate(-50%, -50%);
 }
+
+@keyframes loading {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateY(15px);
+  }
+  50%{
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
