@@ -20,7 +20,7 @@ export default function Home() {
     src: "https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg",
     text: 'Ótima localização!'
   }, {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfu5hiiD_Y_avs3FovzBuehHtQd7xedyfiWw&usqp=CAU",
+    src: "https://watermark.lovepik.com/photo/20211209/large/lovepik-english-teacher-image-teacher-picture_501713021.jpg",
     text: 'Profissionais de qualidade!'
   },
   ]
