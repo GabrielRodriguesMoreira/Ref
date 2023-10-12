@@ -15,21 +15,21 @@ export default function Song() {
     const playlist = [
         {
             src: '/musica.mp3',
-            image: "https://pico.scrolller.com/makima-s-buns-tsunderebean-chainsaw-man-656ytmioo4-608x1080.jpg",
+            image: "https://previews.123rf.com/images/hellocaicai/hellocaicai1802/hellocaicai180200579/96039520-cartoon-cute-flower.jpg",
         },
         {
             src: '/musica2.mp3',
-            image: 'https://letsgeek.com.br/wp-content/uploads/2021/08/208556429_506176184026406_7101088118539650017_n.jpg',
+            image: 'https://cdn.shopify.com/s/files/1/0602/2617/5224/files/f68cfa4c-2596-422c-b115-a7f269196c2b_600x600.png',
         },
         {
             src: '/musica.mp3',
-            image: 'https://www.anibiu.com/cdn/shop/products/243349514_1126709121195018_802225968355380415_n_600x.jpg',
+            image: 'https://easydrawingguides.com/wp-content/uploads/2023/01/how-to-draw-a-cute-cupcake-featured-image-1200-933x1024.png',
         },
     ];
 
-    useEffect(()=>{
+    useEffect(() => {
         audioRef.current.volume = 0.2;
-    },[])
+    }, [])
 
     const playPauseAudio = () => {
         if (isPlaying) {
@@ -41,21 +41,37 @@ export default function Song() {
     };
 
     const previousTrack = () => {
-        setPlaylistIndex(playlistIndex-1)
-        audioRef.current.src = playlistIndex-1;
-        audioRef.current.play();
-        setIsPlaying(true);
+        if (playlistIndex - 1 >= 0) {
+            audioRef.current.src = playlist[playlistIndex - 1].src;
+            setTimeout(() => {
+                audioRef.current.play();
+            }, 100);
+            setIsPlaying(true);
+            setPlaylistIndex(playlistIndex - 1);
+        }
     };
 
     const nextTrack = () => {
-        audioRef.current.src = playlist[playlistIndex+1].src;
-        audioRef.current.play();
-        setIsPlaying(true);
-        setPlaylistIndex(playlistIndex+1)
+        if (playlistIndex + 1 < playlist.length) {
+            audioRef.current.src = playlist[playlistIndex + 1].src;
+            setTimeout(() => {
+                audioRef.current.play();
+            }, 100);
+            setIsPlaying(true);
+            setPlaylistIndex(playlistIndex + 1);
+        }
+    };
+
+    const handleCloseButtonClick = () => {
+        const songContainer = document.getElementById('song-container');
+        if (songContainer) {
+            songContainer.remove();
+        }
     };
 
     return (
         <m.main
+            id='song-container'
             className="fixed w-80 h-16 flex items-center justify-around p-1 bottom-8 rounded-sm shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 cursor-move"
             drag={!isSliding}
             dragConstraints={{
@@ -64,14 +80,17 @@ export default function Song() {
                 bottom: 0,
                 right: window.innerWidth - 350,
             }}
+            initial={{ x: -400 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
         >
             <audio ref={audioRef} src={playlist[playlistIndex].src} volume={0.2}></audio>
             <div className="flex text-2xl text-white">
-                <button onClick={previousTrack}><MdKeyboardDoubleArrowLeft /></button>
-                <button onClick={playPauseAudio}>
+                <button onClick={previousTrack} className='active:text-blue-600'><MdKeyboardDoubleArrowLeft /></button>
+                <button onClick={playPauseAudio} className='active:text-blue-600'>
                     {isPlaying ? <BsPauseFill /> : <BsPlayFill />}
                 </button>
-                <button onClick={nextTrack}><MdKeyboardDoubleArrowRight /></button>
+                <button onClick={nextTrack} className='active:text-blue-600'><MdKeyboardDoubleArrowRight /></button>
             </div>
             <input
                 type="range"
@@ -91,11 +110,11 @@ export default function Song() {
             <div className='relative h-full aspect-square rounded-md overflow-hidden border-gray-300 border-2'>
                 <div className='w-full h-full absolute top-0 left-0'></div>
                 <img
-                   src={playlist[playlistIndex].image}
+                    src={playlist[playlistIndex].image}
                     className='w-full h-full'
                 />
             </div>
-            <button className='text-xl text-white'><AiFillCloseCircle /></button>
+            <button onClick={handleCloseButtonClick} className='text-xl text-white'><AiFillCloseCircle /></button>
         </m.main>
     )
 }
