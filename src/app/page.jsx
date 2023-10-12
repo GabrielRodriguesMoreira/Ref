@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowRight, MdKeyboardDoubleArrowDown } from 'react-icons/md';
 import { motion as m, AnimatePresence, stagger } from 'framer-motion';
 import Modal from './components/modal/modal';
 import Song from './components/song/Song';
@@ -41,28 +41,37 @@ export default function Home() {
     setModal(!modal);
   };
 
+  const scrollPage = () => {
+    window.scrollBy(0, 800);
+  }
+
   const parentMotion = {
     hidden: {},
     show: {
       transition: { staggerChildren: 0.5, delay: 1 }
     }
   }
-  const getRandomPosition = () => ({
-    x: Math.floor(Math.random() * 1700) - 500, // Updated range from -500 to 1200
-    y: Math.floor(Math.random() * 1700) - 500, // Updated range from -500 to 1200
-    rotate: 1080
-  });
-
 
   const imagesMotion = {
-    hidden: getRandomPosition(),
+    hidden: {
+      x: -1000,
+      y: -1000,
+      rotate: 380,
+    },
     show: {
       x: 0,
       y: 0,
       rotate: 0,
-      transition: { duration: 0.8 },
+      transition: {
+        type: "spring",
+        duration: 0.8,
+        damping: 10, 
+        stiffness: 100, 
+        ease: "easeOut",
+      },
     },
   };
+  
 
 
   return (
@@ -73,21 +82,24 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}>
         <section className='w-full h-full flex flex-col lg:flex-row'>
-          <div className="flex w-full flex-col items-center space-y-3 mb-10 lg:w-3/5 lg:mb-0">
+          <div className="flex w-full flex-col items-center space-y-3 lg:w-3/5 lg:mb-0">
             <img src="/title.png" />
             <img src="/gifimage.gif" alt="" />
-            <p className="font-kalam text-pink-700 text-xl lg:text-2xl">
+            <p className="font-kalam text-pink-700 text-xl mb-5  lg:text-2xl">
               &quot;Ensinando com <br></br> <span className="ml-14">responsabilidade!</span>&quot;
             </p>
             <button onClick={swapModal} className="flex items-center justify-center space-x-5 bg-pink-600 p-4 w-full text-2xl text-white font-inter rounded-sm shadow-xl lg:hidden">
               <p>Garanta sua Vaga!</p> <span className="bg-white text-4xl text-pink-700 rounded-full"><MdKeyboardArrowRight /></span>
             </button>
+            <div onClick={scrollPage} className='h-48 w-full flex justify-center items-center space-x-4 font-sans text-3xl text-pink-700 font-black animate-pulse lg:hidden'>
+            <MdKeyboardDoubleArrowDown className=' text-5xl animate-bounce' /> <p>Role para baixo</p> <MdKeyboardDoubleArrowDown className='text-5xl animate-bounce' />
+              </div>
           </div>
           <m.div
             className="flex flex-col w-full items-center space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2 lg:ml-6"
             variants={parentMotion}
             initial="hidden"
-            animate="show"
+            whileInView="show"
           >
             {imagesdata.map((data, index) => (
               <m.div

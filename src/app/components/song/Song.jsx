@@ -89,8 +89,8 @@ export default function Song() {
                         max="100"
                         value={volume}
                         onChange={handleVolumeChange}
-                        onPointerDown={() => setIsRangeDragging(true)}
-                        onPointerUp={() => setIsRangeDragging(false)}
+                        onPointerDownCapture={() => setIsRangeDragging(true)}
+                        onPointerUpCapture={() => setIsRangeDragging(false)}
                         onTouchStart={() => setIsRangeDragging(true)}
                         onTouchEnd={() => setIsRangeDragging(false)}
                     />
