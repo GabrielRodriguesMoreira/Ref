@@ -65,13 +65,13 @@ export default function Home() {
       transition: {
         type: "spring",
         duration: 0.8,
-        damping: 10, 
-        stiffness: 100, 
+        damping: 10,
+        stiffness: 100,
         ease: "easeOut",
       },
     },
   };
-  
+
 
 
   return (
@@ -84,7 +84,10 @@ export default function Home() {
         <section className='w-full h-full flex flex-col lg:flex-row'>
           <div className="flex w-full flex-col items-center space-y-3 lg:w-3/5 lg:mb-0">
             <img src="/title.png" />
-            <img src="/gifimage.gif" alt="" />
+            <video width="640" height="360" autoPlay loop muted>
+              <source src="/gifimage.webm" type="video/webm" />
+                Your browser does not support the video tag.
+            </video>
             <p className="font-kalam text-pink-700 text-xl mb-5  lg:text-2xl">
               &quot;Ensinando com <br></br> <span className="ml-14">responsabilidade!</span>&quot;
             </p>
@@ -92,8 +95,8 @@ export default function Home() {
               <p>Garanta sua Vaga!</p> <span className="bg-white text-4xl text-pink-700 rounded-full"><MdKeyboardArrowRight /></span>
             </button>
             <div onClick={scrollPage} className='h-48 w-full flex justify-center items-center space-x-4 font-sans text-3xl text-pink-700 font-black animate-pulse lg:hidden'>
-            <MdKeyboardDoubleArrowDown className=' text-5xl animate-bounce' /> <p>Role para baixo</p> <MdKeyboardDoubleArrowDown className='text-5xl animate-bounce' />
-              </div>
+              <MdKeyboardDoubleArrowDown className=' text-5xl animate-bounce' /> <p>Role para baixo</p> <MdKeyboardDoubleArrowDown className='text-5xl animate-bounce' />
+            </div>
           </div>
           <m.div
             className="flex flex-col w-full items-center space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2 lg:ml-6"

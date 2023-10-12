@@ -1,128 +1,101 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react';
-import { motion as m } from 'framer-motion'
-import YouTube from 'react-youtube';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import { MdKeyboardDoubleArrowRight, MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { motion as m } from 'framer-motion'
+import React, { useState, useRef, useEffect } from 'react'
 
 export default function Song() {
-    const youtubePlayerRef = useRef(null);
-    const [isPlayerReady, setIsPlayerReady] = useState(false);
-    const [isVideoPlaying, setVideoPlaying] = useState(false);
-    const playlist = ["CarFx8c2c3c", "lF2zPyyKkPA", "DhHGDOgjie4", "8K875HrgVVQ"]
-    const [playlistIndex, setPlaylistIndex] = useState(0)
-    const [songid, setsongid] = useState(null);
-    const [volume, setVolume] = useState(20);
-    const constraintsRef = useRef(null);
-    const [isRangeDragging, setIsRangeDragging] = useState(false);
+    const [isSliding, setIsSliding] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [volume, setVolume] = useState(0.2);
+    const [playlistIndex, setPlaylistIndex] = useState(0);
+    const audioRef = useRef(null);
 
+    const playlist = [
+        {
+            src: '/musica.mp3',
+            image: "https://pico.scrolller.com/makima-s-buns-tsunderebean-chainsaw-man-656ytmioo4-608x1080.jpg",
+        },
+        {
+            src: '/musica2.mp3',
+            image: 'https://letsgeek.com.br/wp-content/uploads/2021/08/208556429_506176184026406_7101088118539650017_n.jpg',
+        },
+        {
+            src: '/musica.mp3',
+            image: 'https://www.anibiu.com/cdn/shop/products/243349514_1126709121195018_802225968355380415_n_600x.jpg',
+        },
+    ];
 
-    useEffect(() => {
-        setsongid(playlist[playlistIndex]);
-        if (isPlayerReady) {
-            youtubePlayerRef.current?.setVolume(volume);
+    useEffect(()=>{
+        audioRef.current.volume = 0.2;
+    },[])
+
+    const playPauseAudio = () => {
+        if (isPlaying) {
+            audioRef.current.pause();
+        } else {
+            audioRef.current.play();
         }
-    }, [playlistIndex])
-
-    const onPlayerReady = (event) => {
-        youtubePlayerRef.current = event.target;
-        setIsPlayerReady(true);
+        setIsPlaying(!isPlaying);
     };
 
-    const handleSwapSong = (mov) => {
-        if (playlistIndex + mov >= 0 && playlistIndex + mov <= playlist.length) {
-            setPlaylistIndex(playlistIndex + mov);
-        }
-    }
-
-    const handleVideoPlayPause = () => {
-        if (isPlayerReady) {
-            if (isVideoPlaying) {
-                youtubePlayerRef.current?.pauseVideo();
-            } else {
-                youtubePlayerRef.current?.playVideo();
-            }
-            setVideoPlaying((prevState) => !prevState);
-        }
+    const previousTrack = () => {
+        setPlaylistIndex(playlistIndex-1)
+        audioRef.current.src = playlistIndex-1;
+        audioRef.current.play();
+        setIsPlaying(true);
     };
 
-    const handleVolumeChange = (event) => {
-        const newVolume = event.target.value;
-        setVolume(newVolume);
-        if (isPlayerReady) {
-            youtubePlayerRef.current?.setVolume(newVolume);
-        }
-    };
-
-    const handleCloseButtonClick = () => {
-        const songContainer = document.getElementById('song-container');
-        if (songContainer) {
-            songContainer.remove();
-        }
+    const nextTrack = () => {
+        audioRef.current.src = playlist[playlistIndex+1].src;
+        audioRef.current.play();
+        setIsPlaying(true);
+        setPlaylistIndex(playlistIndex+1)
     };
 
     return (
-        <>
-            <m.div
-                ref={constraintsRef}
-                className='fixed h-screen w-screen -z-10 top-0 left-0'
-            >
-            </m.div>
-            <m.main
-                id="song-container"
-                className='fixed w-72 h-20  bottom-24 lg:bottom-3  lg:w-80 lg:h-16  left-3 flex items-center justify-around p-2 shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 rounded-md overflow-hidden cursor-move'
-                drag={!isRangeDragging}
-                dragConstraints={constraintsRef}
-            >
-                <div className='controls text-xl lg:text-2xl text-white flex items-center space-x-1'>
-                    <button onClick={() => handleSwapSong(-1)}><MdKeyboardDoubleArrowLeft /></button>
-                    <button onClick={handleVideoPlayPause}>
-                        {isVideoPlaying ? <BsPauseFill /> : <BsPlayFill />}
-                    </button>
-                    <button onClick={() => handleSwapSong(1)}><MdKeyboardDoubleArrowRight /></button>
-
-                    <input
-                        className='w-16 lg:w-28 cursor-pointer'
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={volume}
-                        onChange={handleVolumeChange}
-                        onPointerDownCapture={() => setIsRangeDragging(true)}
-                        onPointerUpCapture={() => setIsRangeDragging(false)}
-                        onTouchStart={() => setIsRangeDragging(true)}
-                        onTouchEnd={() => setIsRangeDragging(false)}
-                    />
-                </div>
-                {songid && (
-                    <div className='relative h-full aspect-square rounded-md overflow-hidden border-slate-950 border-2'>
-                        <div className='absolute w-full h-full  z-10'></div>
-                        <YouTube
-                            iframeClassName='youtube_iframe'
-                            videoId={songid}
-                            onEnd={() => { handleSwapSong(1) }}
-                            onStateChange={() => {
-                                if (isPlayerReady) {
-                                    youtubePlayerRef.current?.setVolume(volume);
-                                }
-                            }}
-                            opts={{
-                                playerVars: {
-                                    autoplay: 1,
-                                    controls: 0,
-                                    loop: 0,
-                                    modestbranding: 1,
-                                    volume: 20,
-                                },
-                            }}
-                            onReady={onPlayerReady}
-                        />
-                    </div>
-                )}
-                <AiFillCloseCircle className='text-white text-xl cursor-pointer' onClick={handleCloseButtonClick} />
-            </m.main>
-
-        </>
-    );
+        <m.main
+            className="fixed w-80 h-16 flex items-center justify-around p-1 bottom-8 rounded-sm shadow-md shadow-zinc-900 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-500 cursor-move"
+            drag={!isSliding}
+            dragConstraints={{
+                left: 0,
+                top: 100 - window.innerHeight,
+                bottom: 0,
+                right: window.innerWidth - 350,
+            }}
+        >
+            <audio ref={audioRef} src={playlist[playlistIndex].src} volume={0.2}></audio>
+            <div className="flex text-2xl text-white">
+                <button onClick={previousTrack}><MdKeyboardDoubleArrowLeft /></button>
+                <button onClick={playPauseAudio}>
+                    {isPlaying ? <BsPauseFill /> : <BsPlayFill />}
+                </button>
+                <button onClick={nextTrack}><MdKeyboardDoubleArrowRight /></button>
+            </div>
+            <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={(e) => {
+                    setVolume(e.target.value);
+                    audioRef.current.volume = e.target.value;
+                }}
+                onPointerDownCapture={() => setIsSliding(true)}
+                onPointerUpCapture={() => setIsSliding(false)}
+                onTouchStart={() => setIsSliding(true)}
+                onTouchEnd={() => setIsSliding(false)}
+            />
+            <div className='relative h-full aspect-square rounded-md overflow-hidden border-gray-300 border-2'>
+                <div className='w-full h-full absolute top-0 left-0'></div>
+                <img
+                   src={playlist[playlistIndex].image}
+                    className='w-full h-full'
+                />
+            </div>
+            <button className='text-xl text-white'><AiFillCloseCircle /></button>
+        </m.main>
+    )
 }
