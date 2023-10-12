@@ -55,7 +55,7 @@ export default function Home() {
   const imagesMotion = {
     hidden: {
       x: -1000,
-      y: -1000,
+      y: -200,
       rotate: 380,
     },
     show: {
@@ -77,11 +77,11 @@ export default function Home() {
   return (
     <>
       {load ? <m.main
-        className="flex flex-col p-3 pb-10 lg:flex-wrap"
+        className="flex flex-col  pb-10 lg:flex-wrap"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}>
-        <section className='w-full h-full flex flex-col lg:flex-row'>
+        <section className='w-full h-full flex flex-col lg:flex-row p-3'>
           <div className="flex w-full flex-col items-center space-y-3 lg:w-3/5 lg:mb-0">
             <img src="/title.png" />
             <video width="640" height="360" autoPlay loop muted>
@@ -123,9 +123,9 @@ export default function Home() {
         </section>
 
         <section className='w-full mt-10 flex justify-center'>
-          <div className=' bg-pink-500 w-full lg:w-4/5 space-y-3 p-3 rounded-sm shadow-md flex flex-col justify-center text-center items-center'>
+          <div className=' bg-pink-500 w-full h-[400px] lg:h-[600px] space-y-3 p-2 rounded-sm flex flex-col justify-center text-center items-center'>
             <h1 className='text-white font-inter text-3xl font-black'>Onde nos Encontrar</h1>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.3219278177307!2d-38.576046361683815!3d-3.734767765175114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74b3e63c0b099%3A0xfa95d644e67a3b3c!2sRefor%C3%A7o%20Escolar%20Tia%20Glau!5e0!3m2!1spt-PT!2sbr!4v1696977218383!5m2!1spt-PT!2sbr" className='w-full h-96' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.3219278177307!2d-38.576046361683815!3d-3.734767765175114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74b3e63c0b099%3A0xfa95d644e67a3b3c!2sRefor%C3%A7o%20Escolar%20Tia%20Glau!5e0!3m2!1spt-PT!2sbr!4v1696977218383!5m2!1spt-PT!2sbr" className='w-full h-full' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             <p className='text-white font-inter text-md font-black'>Rua Emilia Freitas 140 - Padre Andrade - Fortaleza/CE</p>
           </div>
         </section>
