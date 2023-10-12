@@ -1,26 +1,29 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { MdKeyboardArrowRight, MdKeyboardDoubleArrowDown } from 'react-icons/md';
 import { motion as m, AnimatePresence, stagger } from 'framer-motion';
-import Modal from './components/modal/modal';
-import Song from './components/song/Song';
+import Image from 'next/image'
 import Loading from './loading.js';
+
+const Song = lazy(() => import('./components/song/Song'));
+const Modal = lazy(() => import('./components/modal/modal'));
+
 
 export default function Home() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const [modal, setModal] = useState(false);
   const [load, setload] = useState(false)
   const imagesdata = [{
-    src: "https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg",
+    src: "/image.webp",
     text: '10 anos de experiência!'
   }, {
-    src: "https://horario.com.br/wp-content/uploads/2022/03/geha-blog-mar%C3%A7o-09-03.jpg",
+    src: "/image.webp",
     text: 'Ambiente acolhedor!'
   }, {
-    src: "https://blog.redebatista.edu.br/wp-content/uploads/2020/03/original-5163ba17ddbf11f7562a4c18a7f7cbb6.jpg",
+    src: "/image.webp",
     text: 'Ótima localização!'
   }, {
-    src: "https://watermark.lovepik.com/photo/20211209/large/lovepik-english-teacher-image-teacher-picture_501713021.jpg",
+    src: "/image.webp",
     text: 'Profissionais de qualidade!'
   },
   ]
@@ -54,7 +57,7 @@ export default function Home() {
 
   const imagesMotion = {
     hidden: {
-      x: -1000,
+      x: -1500,
       y: -200,
       rotate: 380,
     },
@@ -86,7 +89,7 @@ export default function Home() {
             <img src="/title.png" />
             <video width="640" height="360" autoPlay loop muted>
               <source src="/gifimage.webm" type="video/webm" />
-                Your browser does not support the video tag.
+              Your browser does not support the video tag.
             </video>
             <p className="font-kalam text-pink-700 text-xl mb-5  lg:text-2xl">
               &quot;Ensinando com <br></br> <span className="ml-14">responsabilidade!</span>&quot;
@@ -107,12 +110,14 @@ export default function Home() {
             {imagesdata.map((data, index) => (
               <m.div
                 key={index}
-                className="bg-white border-1 border-black p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm cursor-pointer shadow-lg"
+                className="bg-white border-1 border-black p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm cursor-pointer shadow-lg "
                 onClick={() => openFullscreenImage(data.src)}
                 variants={imagesMotion}
                 whileHover={{ scale: 1.1 }}
               >
-                <img className="rounded-sm max-h-52 object-cover" src={data.src} alt="" />
+                <div className='relative h-72 lg:h-56'>
+                  <Image style={{ objectFit: "cover" }} className="rounded-sm" fill src={data.src} alt="" />
+                </div>
                 <p>{data.text}</p>
               </m.div>
             ))}
@@ -148,20 +153,24 @@ export default function Home() {
           initial='false'
           onExitComplete={() => null}
         >
-          {modal && (
-            <m.div onClick={swapModal}
-              className="fixed top-0 left-0 lg:-left-2 w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50 px-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Modal />
-            </m.div>
-          )}
+          <Suspense fallback={<Loading />}>
+            {modal && (
+              <m.div onClick={swapModal}
+                className="fixed top-0 left-0 lg:-left-2 w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50 px-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Modal />
+              </m.div>
+            )}
+          </Suspense>
         </AnimatePresence >
+        <Suspense fallback={<Loading />}>
+          <Song />
+        </Suspense>
 
-        <Song />
       </m.main > : <Loading />}
 
     </>
