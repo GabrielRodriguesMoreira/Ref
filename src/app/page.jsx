@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { MdKeyboardArrowRight, MdKeyboardDoubleArrowDown } from 'react-icons/md';
-import { motion as m, AnimatePresence, stagger } from 'framer-motion';
+import { motion as m, AnimatePresence, stagger, easeInOut } from 'framer-motion';
 import Image from 'next/image'
 import Loading from './loading.js';
 
@@ -57,13 +57,11 @@ export default function Home() {
 
   const imagesMotion = {
     hidden: {
-      x: -1500,
-      y: -200,
+      scale: 0,
       rotate: 380,
     },
     show: {
-      x: 0,
-      y: 0,
+      scale: 1,
       rotate: 0,
       transition: {
         type: "spring",
@@ -72,7 +70,8 @@ export default function Home() {
         stiffness: 100,
         ease: "easeOut",
       },
-    },
+
+    }
   };
 
 
@@ -88,7 +87,6 @@ export default function Home() {
             <Image src="/title.png" width={600} height={400} />
             <video width="640" height="360" autoPlay loop muted>
               <source src="/gifimage.webm" type="video/webm" />
-              Your browser does not support the video tag.
             </video>
             <p className="font-kalam text-pink-700 text-xl mb-5  lg:text-2xl">
               &quot;Ensinando com <br></br> <span className="ml-14">responsabilidade!</span>&quot;
@@ -105,14 +103,19 @@ export default function Home() {
             variants={parentMotion}
             initial="hidden"
             whileInView="show"
+            
           >
             {imagesdata.map((data, index) => (
               <m.div
                 key={index}
-                className="bg-white border-1 border-black p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm cursor-pointer shadow-lg "
+                id={"imagenode"+String(index)}
+                className="bg-white border-1 border-black p-2 flex flex-col w-full text-center space-y-2 font-inter text-lg rounded-sm cursor-pointer shadow-lg childnodehover"
                 onClick={() => openFullscreenImage(data.src)}
                 variants={imagesMotion}
-                whileHover={{ scale: 1.1 }}
+                style={{ transition: 'transform 0.2s' }}
+                onHoverStart={()=>{document.getElementById("imagenode"+String(index)).style.transform = `scale(1.1,1.1)`}}
+                onHoverEnd={()=>{document.getElementById("imagenode"+String(index)).style.transform = `scale(1,1)`}}
+                
               >
                 <div className='relative h-72 lg:h-56'>
                   <Image style={{ objectFit: "cover" }} className="rounded-sm" fill src={data.src} alt="" />
@@ -126,13 +129,14 @@ export default function Home() {
           </m.div>
         </section>
         <Suspense fallback={<Loading />}>
-          <section className='w-full mt-10 flex justify-center'>
-            <div className=' bg-pink-500 w-full h-[400px] lg:h-[600px] space-y-3 p-2 rounded-sm flex flex-col justify-center text-center items-center'>
-              <h1 className='text-white font-inter text-3xl font-black'>Onde nos Encontrar</h1>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.3219278177307!2d-38.576046361683815!3d-3.734767765175114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74b3e63c0b099%3A0xfa95d644e67a3b3c!2sRefor%C3%A7o%20Escolar%20Tia%20Glau!5e0!3m2!1spt-PT!2sbr!4v1696977218383!5m2!1spt-PT!2sbr" className='w-full h-full' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-              <p className='text-white font-inter text-md font-black'>Rua Emilia Freitas 140 - Padre Andrade - Fortaleza/CE</p>
-            </div>
+
+          <section className=' bg-pink-500 w-full h-[600px] shadow-lg space-y-3 py-2 rounded-sm flex flex-col justify-center text-center items-center mt-10'>
+            <h1 className='text-white font-inter text-3xl font-black'>Onde nos Encontrar</h1>
+            <p className='text-white font-inter text-md font-black'>Rua Emilia Freitas 140 - Padre Andrade - Fortaleza/CE</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.3219278177307!2d-38.576046361683815!3d-3.734767765175114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74b3e63c0b099%3A0xfa95d644e67a3b3c!2sRefor%C3%A7o%20Escolar%20Tia%20Glau!5e0!3m2!1spt-PT!2sbr!4v1696977218383!5m2!1spt-PT!2sbr" className='w-full h-full' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
           </section>
+
+
         </Suspense>
         <Suspense fallback={<Loading />}>
           <AnimatePresence>

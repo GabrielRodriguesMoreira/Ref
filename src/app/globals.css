@@ -26,19 +26,28 @@ body * {
   transform: translate(-50%, -50%);
 }
 
+
+.childnodehover:hover{
+z-index: 10;
+}
+
 @keyframes loading {
   0% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateY(15px);
   }
-  50%{
+
+  50% {
     transform: translateX(0);
   }
+
   75% {
     transform: translateY(-15px);
   }
+
   100% {
     transform: translateX(0);
   }
