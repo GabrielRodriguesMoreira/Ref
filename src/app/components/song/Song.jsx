@@ -97,6 +97,7 @@ export default function Song() {
                 min="0"
                 max="1"
                 step="0.01"
+                className='cursor-pointer'
                 value={volume}
                 onChange={(e) => {
                     setVolume(e.target.value);
