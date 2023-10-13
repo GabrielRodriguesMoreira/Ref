@@ -76,7 +76,6 @@ export default function Home() {
   };
 
 
-
   return (
     <>
       {load ? <m.main
@@ -102,7 +101,7 @@ export default function Home() {
             </div>
           </div>
           <m.div
-            className="flex flex-col w-full items-center space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2 lg:ml-6"
+            className="flex flex-col w-full  items-center space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2 lg:ml-6"
             variants={parentMotion}
             initial="hidden"
             whileInView="show"
